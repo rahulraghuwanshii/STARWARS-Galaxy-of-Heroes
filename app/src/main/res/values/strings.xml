@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">MyStartHeros</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="full_name">Full Name</string>
+    <string name="height">Height</string>
+    <string name="homeworld">HomeWorld</string>
+    <string name="birth_year">Birth Year</string>
+    <string name="gender">Gender</string>
+    <string name="films">Films</string>
+    <string name="hair_color">Hair Color</string>
+    <string name="eye_color">Eye Color</string>
+    <string name="skin_color">Skin Color</string>
+    <string name="mass">Mass</string>
+    <string name="movies">Movies</string>
+</resources>
