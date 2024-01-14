@@ -6,7 +6,7 @@
   </p>
   
   # 🗡️ Dependency Injection
-The project uses [Dagger-2](https://developer.android.com/training/dependency-injection/dagger-android)) for Dependency Injection :syringe: 
+The project uses ([Dagger-2](https://developer.android.com/training/dependency-injection/dagger-android)) for Dependency Injection :syringe: 
 
 # :wrench: Built With
 - [Kotlin](https://kotlinlang.org/) - Programming Language Used in the app.
@@ -14,7 +14,7 @@ The project uses [Dagger-2](https://developer.android.com/training/dependency-in
 - [Navigation Component Library](https://developer.android.com/guide/navigation) - For setting up app's navigation.
 - [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) - Used to observe the data on the UI layer
 - [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - To Store UI-related data that isnt destroyed on UI changes.
-- [Hilt](https://developer.android.com/training/dependency-injection/hilt-android) - For Dependency Injection
+- [Dagger-2]((https://developer.android.com/training/dependency-injection/dagger-android)) - For Dependency Injection
 
 ## Screenshots
 
