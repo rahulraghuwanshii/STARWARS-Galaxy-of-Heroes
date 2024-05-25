@@ -9,11 +9,11 @@ plugins {
 }
 
 android {
-    namespace = "com.rahulraghuwanshi.mystartheros"
+    namespace = "com.rahulraghuwanshi.starwarshero"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.rahulraghuwanshi.mystartheros"
+        applicationId = "com.rahulraghuwanshi.starwarshero"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

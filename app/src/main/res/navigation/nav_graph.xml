@@ -7,18 +7,18 @@
 
     <fragment
         android:id="@+id/characterDetailFragment"
-        android:name="com.rahulraghuwanshi.mystartheros.presentation.character_detail.CharacterDetailFragment"
+        android:name="com.rahulraghuwanshi.starwarshero.presentation.character_detail.CharacterDetailFragment"
         android:label="fragment_character_detail"
         tools:layout="@layout/fragment_character_detail" >
 
         <argument
             android:name="characterDetails"
-            app:argType="com.rahulraghuwanshi.mystartheros.domain.model.Character" />
+            app:argType="com.rahulraghuwanshi.starwarshero.domain.model.Character" />
 
     </fragment>
     <fragment
         android:id="@+id/characterListFragment"
-        android:name="com.rahulraghuwanshi.mystartheros.presentation.characters_list.CharacterFragment"
+        android:name="com.rahulraghuwanshi.starwarshero.presentation.characters_list.CharacterFragment"
         android:label="fragment_character_list"
         tools:layout="@layout/fragment_character_list" >
         <action
@@ -27,7 +27,7 @@
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.rahulraghuwanshi.mystartheros.presentation.splash.SplashFragment"
+        android:name="com.rahulraghuwanshi.starwarshero.presentation.splash.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" >
         <action
