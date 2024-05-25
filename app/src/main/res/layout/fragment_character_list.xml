@@ -4,22 +4,48 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/ic_background"
+    android:background="@color/black"
     tools:context=".presentation.characters_list.CharacterFragment">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/iv_star_war"
+    <LinearLayout
+        android:id="@+id/llToolbar"
         android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="8dp"
-        android:src="@drawable/ic_star_wars"
+        android:layout_height="?attr/actionBarSize"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        android:gravity="center_vertical"
+        android:background="@drawable/ic_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" >
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="16dp"
+            android:background="@color/yellow"/>
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_star_war"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_star_wars" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:layout_marginStart="16dp"
+            android:background="@color/yellow"/>
+
+    </LinearLayout>
+
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_star_war_character"
+        android:id="@+id/rvStarWarCharacter"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -34,18 +60,18 @@
         app:layout_constraintBottom_toTopOf="@+id/charactersProgressBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_star_war" />
+        app:layout_constraintTop_toBottomOf="@+id/llToolbar" />
 
     <ProgressBar
         android:id="@+id/charactersProgressBar"
         style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:indeterminateTint="@color/yellow"
         android:indeterminateTintMode="src_in"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rv_star_war_character" />
+        app:layout_constraintTop_toBottomOf="@+id/rvStarWarCharacter" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
