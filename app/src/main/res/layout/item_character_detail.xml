@@ -8,42 +8,47 @@
     android:clickable="true"
     android:focusable="true"
     app:cardBackgroundColor="@android:color/transparent"
-    app:cardCornerRadius="12dp">
+    app:cardCornerRadius="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/ic_background"
-        android:padding="10dp">
+        android:paddingHorizontal="10dp"
+        tools:background="@drawable/ic_background">
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_name"
+            android:id="@+id/txtName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:gravity="center"
-            android:textColor="@color/yellow"
+            android:layout_marginTop="12dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textAlignment="textStart"
+            android:textColor="@color/yellow_80"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Luke Skywalker" />
+            tools:text="Luke Skywalker : " />
 
         <View
             android:id="@+id/divider"
             android:layout_width="0dp"
-            android:layout_height="0.3dp"
-            android:layout_marginTop="16dp"
+            android:layout_height="0.2dp"
+            android:layout_marginVertical="8dp"
             android:background="@color/white"
+            app:layout_constraintBottom_toTopOf="@id/llDetail"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_name" />
+            app:layout_constraintTop_toBottomOf="@id/txtName" />
 
         <LinearLayout
+            android:id="@+id/llDetail"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/divider">
@@ -56,10 +61,9 @@
                 android:orientation="vertical">
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tv_gender_header"
+                    android:id="@+id/txtGenderHeader"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
                     android:gravity="center_horizontal"
                     android:text="@string/gender"
                     android:textColor="@color/light_gray"
@@ -70,12 +74,12 @@
                     app:layout_constraintTop_toBottomOf="@+id/view" />
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tv_gender"
+                    android:id="@+id/txtGender"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:gravity="center_horizontal"
-                    android:textColor="@color/white"
+                    android:textColor="@color/white_80"
                     app:layout_constraintEnd_toEndOf="@+id/textViewHeight"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/textViewHeight"
@@ -92,10 +96,9 @@
                 android:orientation="vertical">
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tv_height_header"
+                    android:id="@+id/txtHeightHeader"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
                     android:gravity="center_horizontal"
                     android:text="@string/height"
                     android:textColor="@color/light_gray"
@@ -106,12 +109,12 @@
                     app:layout_constraintTop_toBottomOf="@+id/view" />
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tv_height"
+                    android:id="@+id/txtHeight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:gravity="center_horizontal"
-                    android:textColor="@color/white"
+                    android:textColor="@color/white_80"
                     app:layout_constraintEnd_toEndOf="@+id/textViewHeight"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/textViewHeight"

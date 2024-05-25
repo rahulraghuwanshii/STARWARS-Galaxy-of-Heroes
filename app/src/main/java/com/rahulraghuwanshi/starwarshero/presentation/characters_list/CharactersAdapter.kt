@@ -40,7 +40,7 @@ class CharacterDiffCallBack : DiffUtil.ItemCallback<Character>() {
 }
 
 class CharacterPosterViewHolder(
-    val binding: ItemCharacterDetailBinding,
+    private val binding: ItemCharacterDetailBinding,
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(
@@ -49,9 +49,9 @@ class CharacterPosterViewHolder(
     ) {
         character?.let {
             binding.root.setOnClickListener { onClick.invoke(character) }
-            binding.tvName.text = character.name
-            binding.tvGender.text = character.gender.uppercase()
-            binding.tvHeight.text = character.height
+            binding.txtName.text = "${character.name} :"
+            binding.txtGender.text = character.gender.uppercase()
+            binding.txtHeight.text = character.height
         }
     }
 }
