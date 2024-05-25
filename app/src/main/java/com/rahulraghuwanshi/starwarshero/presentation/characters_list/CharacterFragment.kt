@@ -31,11 +31,9 @@ class CharacterFragment : Fragment() {
 
     private var _binding: FragmentCharacterListBinding? = null
     private val binding get() = _binding!!
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentCharacterListBinding.inflate(inflater, container, false)
-        val view = binding.root
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
         (requireContext().applicationContext as Injector).createCharacterListSubComponent()
             .inject(this)
@@ -46,8 +44,16 @@ class CharacterFragment : Fragment() {
         )[CharactersViewModel::class.java]
 
         getData()
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentCharacterListBinding.inflate(inflater, container, false)
+        val view = binding.root
         return view
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -84,21 +90,25 @@ class CharacterFragment : Fragment() {
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
-            charactersAdapter.loadStateFlow.collectLatest {
-                if (charactersAdapter.itemCount > 0) {
-                    binding.rvStarWarCharacter.visibility = View.VISIBLE
+            repeatOnLifecycle(Lifecycle.State.CREATED) {
+                charactersAdapter.loadStateFlow.collectLatest {
+                    if (charactersAdapter.itemCount > 0) {
+                        binding.rvStarWarCharacter.visibility = View.VISIBLE
+                    }
                 }
             }
+        }
 
-            repeatOnLifecycle(Lifecycle.State.RESUMED){
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.CREATED) {
                 charactersAdapter.addLoadStateListener { loadState ->
 
                     if (loadState.refresh is LoadState.Loading ||
                         loadState.append is LoadState.Loading
-                    )
-                    // Show ProgressBar
+                    ) {
+                        // Show ProgressBar
                         binding.charactersProgressBar.visibility = View.VISIBLE
-                    else {
+                    } else {
                         // Hide ProgressBar
                         binding.charactersProgressBar.visibility = View.GONE
 
@@ -110,7 +120,8 @@ class CharacterFragment : Fragment() {
                             else -> null
                         }
                         errorState?.let {
-                            Toast.makeText(requireContext(), it.error.toString(), Toast.LENGTH_LONG).show()
+                            Toast.makeText(requireContext(), it.error.toString(), Toast.LENGTH_LONG)
+                                .show()
                         }
                     }
                 }
