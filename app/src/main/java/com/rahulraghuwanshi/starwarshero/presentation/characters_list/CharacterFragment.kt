@@ -13,6 +13,8 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.transition.ChangeBounds
+import androidx.transition.TransitionInflater
 import com.rahulraghuwanshi.starwarshero.databinding.FragmentCharacterListBinding
 import com.rahulraghuwanshi.starwarshero.di.core.Injector
 import kotlinx.coroutines.flow.collectLatest
@@ -51,6 +53,8 @@ class CharacterFragment : Fragment() {
     ): View? {
         _binding = FragmentCharacterListBinding.inflate(inflater, container, false)
         val view = binding.root
+        sharedElementEnterTransition = TransitionInflater.from(requireContext()).inflateTransition(android.R.transition.move)
+
         return view
     }
 

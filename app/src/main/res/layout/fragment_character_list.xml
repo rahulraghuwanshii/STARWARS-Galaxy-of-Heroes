@@ -4,43 +4,43 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/black"
+    android:background="@drawable/ic_background"
     tools:context=".presentation.characters_list.CharacterFragment">
-
-    <LinearLayout
-        android:id="@+id/llToolbar"
-        android:layout_width="0dp"
-        android:layout_height="?attr/actionBarSize"
-        android:orientation="horizontal"
-        android:paddingHorizontal="16dp"
-        android:gravity="center_vertical"
-        android:background="@drawable/ic_background"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
 
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_weight="1"
-            android:layout_marginEnd="16dp"
-            android:background="@color/yellow"/>
+            android:layout_marginHorizontal="16dp"
+            android:background="@color/yellow"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/imgStarWar"
+            app:layout_constraintBottom_toBottomOf="@id/imgStarWar"
+            app:layout_constraintEnd_toStartOf="@id/imgStarWar"/>
 
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_star_war"
+            android:id="@+id/imgStarWar"
             android:layout_width="80dp"
             android:layout_height="40dp"
-            android:src="@drawable/ic_star_wars" />
+            android:layout_marginTop="8dp"
+            android:transitionName="imgStarWarsTransitionEnd"
+            android:src="@drawable/ic_star_wars"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_weight="1"
-            android:layout_marginStart="16dp"
-            android:background="@color/yellow"/>
+            android:layout_marginHorizontal="16dp"
+            android:background="@color/yellow"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/imgStarWar"
+            app:layout_constraintBottom_toBottomOf="@id/imgStarWar"
+            app:layout_constraintStart_toEndOf="@id/imgStarWar"/>
 
-    </LinearLayout>
 
 
 
@@ -60,7 +60,7 @@
         app:layout_constraintBottom_toTopOf="@+id/charactersProgressBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/llToolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/imgStarWar" />
 
     <ProgressBar
         android:id="@+id/charactersProgressBar"
