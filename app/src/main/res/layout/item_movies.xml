@@ -5,24 +5,21 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="4dp"
-    android:layout_marginEnd="5dp"
-    android:background="@color/main"
-    app:cardCornerRadius="12dp"
+    android:backgroundTint="@android:color/transparent"
+    app:cardCornerRadius="8dp"
     app:cardElevation="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/main"
-        android:padding="8dp">
+        android:background="@android:color/transparent"
+        android:padding="10dp"
+        tools:background="@android:color/black">
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_movie_name"
+            android:id="@+id/txtMovieName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -33,22 +30,18 @@
             android:id="@+id/view"
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginTop="10dp"
             android:background="#7c7c7c"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_movie_name" />
+            app:layout_constraintTop_toBottomOf="@+id/txtMovieName" />
 
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_description"
+            android:id="@+id/txtDescription"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginTop="10dp"
             android:ellipsize="end"
             android:maxLines="15"
             android:textColor="@color/light_gray"

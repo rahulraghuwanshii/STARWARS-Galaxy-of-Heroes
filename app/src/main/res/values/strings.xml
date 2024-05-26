@@ -13,4 +13,5 @@
     <string name="skin_color">Skin Color</string>
     <string name="mass">Mass</string>
     <string name="movies">Movies</string>
+    <string name="character_details">Character Details :</string>
 </resources>

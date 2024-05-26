@@ -11,6 +11,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.rahulraghuwanshi.starwarshero.databinding.FragmentCharacterDetailBinding
 import com.rahulraghuwanshi.starwarshero.di.core.Injector
@@ -69,15 +70,19 @@ class CharacterDetailFragment : Fragment() {
     private fun setUp() {
         val character = args.characterDetails
 
-        binding.tvName.text = character.name
-        binding.tvSkinColor.text = character.skinColor.uppercase()
-        binding.tvHairColor.text = character.hairColor.uppercase()
-        binding.tvHeight.text = character.height
-        binding.tvMass.text = character.mass
-        binding.tvEyeColor.text = character.eyeColor.uppercase()
-        binding.tvGender.text = character.gender.uppercase()
-        binding.tvBirthYear.text = character.birthYear
+        binding.txtName.text = character.name
+        binding.txtDetailName.text = character.name
+        binding.txtSkinColor.text = character.skinColor.uppercase()
+        binding.txtHairColor.text = character.hairColor.uppercase()
+        binding.txtHeight.text = character.height
+        binding.txtMass.text = character.mass
+        binding.txtEyeColor.text = character.eyeColor.uppercase()
+        binding.txtGender.text = character.gender.uppercase()
+        binding.txtBirthYear.text = character.birthYear
 
+        binding.imgBackButton.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
     private fun collectFlow() {
@@ -88,17 +93,20 @@ class CharacterDetailFragment : Fragment() {
                     when (it.status) {
                         RestClientResult.Status.SUCCESS -> {
                             binding.progressBarHomeWord.isVisible = false
-                            binding.tvHomeWorld.text = it.data?.name
+                            binding.txtHomeWorld.isVisible = true
+                            binding.txtHomeWorld.text = it.data?.name
                         }
 
                         RestClientResult.Status.ERROR -> {
                             binding.progressBarHomeWord.isVisible = false
-                            binding.tvHomeWorld.text = it.message
+                            binding.txtHomeWorld.isVisible = true
+                            binding.txtHomeWorld.text = it.message
                             Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
                         }
 
                         RestClientResult.Status.LOADING -> {
                             binding.progressBarHomeWord.isVisible = true
+                            binding.txtHomeWorld.isVisible = false
                         }
 
                         RestClientResult.Status.NONE -> {
@@ -121,8 +129,8 @@ class CharacterDetailFragment : Fragment() {
 
                         RestClientResult.Status.ERROR -> {
                             binding.progressMovies.isVisible = false
-                            binding.tvMoviesError.isVisible = true
-                            binding.tvMoviesError.text = it.message
+                            binding.txtMoviesError.isVisible = true
+                            binding.txtMoviesError.text = it.message
                         }
 
                         RestClientResult.Status.LOADING -> {
