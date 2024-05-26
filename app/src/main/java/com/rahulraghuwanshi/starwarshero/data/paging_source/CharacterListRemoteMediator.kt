@@ -1,6 +1,5 @@
 package com.rahulraghuwanshi.starwarshero.data.paging_source
 
-import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
@@ -40,7 +39,6 @@ class CharacterListRemoteMediator(
      * This causes the RemoteMediator to skip the remote refresh and load the cached data.
      */
     override suspend fun initialize(): InitializeAction {
-        Log.d("MAJAMA", "initialize() called")
         val cacheTimeout = TimeUnit.MILLISECONDS.convert(1, TimeUnit.HOURS)
 
         return if (System.currentTimeMillis() - (starWarDatabase.remoteKeyDao().getCreationTime()
@@ -61,13 +59,13 @@ class CharacterListRemoteMediator(
      * When we need to load data at the end of the currently loaded data set, the load parameter is LoadType.APPEND
      */
     private suspend fun getRemoteKeyForLastItem(state: PagingState<Int, Character>): RemoteKeys? {
-        Log.d("MAJAMA", "getRemoteKeyForLastItem() called with: state = $state")
         // Get the last page that was retrieved, that contained items.
         // From that last page, get the last item
         return state.pages.lastOrNull {
             it.data.isNotEmpty()
         }?.data?.lastOrNull()?.let { character ->
-            starWarDatabase.remoteKeyDao().getRemoteKeyByCharacterID("${character.birthYear}_${character.eyeColor}_${character.gender}_${character.hairColor}_${character.height}_${character.name}")
+            starWarDatabase.remoteKeyDao()
+                .getRemoteKeyByCharacterID("${character.birthYear}_${character.eyeColor}_${character.gender}_${character.hairColor}_${character.height}_${character.name}")
         }
     }
 
@@ -75,13 +73,13 @@ class CharacterListRemoteMediator(
      * When we need to load data at the beginning of the currently loaded data set, the load parameter is LoadType.PREPEND
      */
     private suspend fun getRemoteKeyForFirstItem(state: PagingState<Int, Character>): RemoteKeys? {
-        Log.d("MAJAMA", "getRemoteKeyForFirstItem() called with: state = $state")
         // Get the first page that was retrieved, that contained items.
         // From that first page, get the first item
         return state.pages.firstOrNull {
             it.data.isNotEmpty()
         }?.data?.firstOrNull()?.let { character ->
-            starWarDatabase.remoteKeyDao().getRemoteKeyByCharacterID("${character.birthYear}_${character.eyeColor}_${character.gender}_${character.hairColor}_${character.height}_${character.name}")
+            starWarDatabase.remoteKeyDao()
+                .getRemoteKeyByCharacterID("${character.birthYear}_${character.eyeColor}_${character.gender}_${character.hairColor}_${character.height}_${character.name}")
         }
     }
 
@@ -96,7 +94,8 @@ class CharacterListRemoteMediator(
         // Get the item closest to the anchor position
         return state.anchorPosition?.let { position ->
             state.closestItemToPosition(position)?.let { character ->
-                starWarDatabase.remoteKeyDao().getRemoteKeyByCharacterID("${character.birthYear}_${character.eyeColor}_${character.gender}_${character.hairColor}_${character.height}_${character.name}")
+                starWarDatabase.remoteKeyDao()
+                    .getRemoteKeyByCharacterID("${character.birthYear}_${character.eyeColor}_${character.gender}_${character.hairColor}_${character.height}_${character.name}")
             }
         }
     }

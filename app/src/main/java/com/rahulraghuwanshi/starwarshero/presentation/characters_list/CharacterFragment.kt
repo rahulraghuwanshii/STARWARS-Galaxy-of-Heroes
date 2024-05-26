@@ -10,9 +10,12 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.transition.ChangeBounds
+import androidx.transition.TransitionInflater
 import com.rahulraghuwanshi.starwarshero.databinding.FragmentCharacterListBinding
 import com.rahulraghuwanshi.starwarshero.di.core.Injector
 import kotlinx.coroutines.flow.collectLatest
@@ -31,11 +34,9 @@ class CharacterFragment : Fragment() {
 
     private var _binding: FragmentCharacterListBinding? = null
     private val binding get() = _binding!!
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentCharacterListBinding.inflate(inflater, container, false)
-        val view = binding.root
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
         (requireContext().applicationContext as Injector).createCharacterListSubComponent()
             .inject(this)
@@ -46,8 +47,18 @@ class CharacterFragment : Fragment() {
         )[CharactersViewModel::class.java]
 
         getData()
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentCharacterListBinding.inflate(inflater, container, false)
+        val view = binding.root
+        sharedElementEnterTransition = TransitionInflater.from(requireContext()).inflateTransition(android.R.transition.move)
+
         return view
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -60,12 +71,15 @@ class CharacterFragment : Fragment() {
     }
 
     private fun setUp() {
-        charactersAdapter = CharactersAdapter {
-            val action =
-                CharacterFragmentDirections.actionCharacterListFragmentToCharacterDetailFragment(
-                    characterDetails = it
-                )
-            findNavController().navigate(action)
+        charactersAdapter = CharactersAdapter { charater,nameView,genderView,heightView ->
+            val action = CharacterFragmentDirections.actionCharacterListFragmentToCharacterDetailFragment(characterDetails = charater)
+
+            val extras = FragmentNavigatorExtras(
+                nameView to "nameViewTransition",
+                genderView to "genderViewTransition",
+                heightView to "heightViewTransition"
+            )
+            findNavController().navigate(action,extras)
         }
         val layoutManager = GridLayoutManager(requireContext(), 2)
         binding.rvStarWarCharacter.layoutManager = layoutManager
@@ -84,21 +98,25 @@ class CharacterFragment : Fragment() {
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
-            charactersAdapter.loadStateFlow.collectLatest {
-                if (charactersAdapter.itemCount > 0) {
-                    binding.rvStarWarCharacter.visibility = View.VISIBLE
+            repeatOnLifecycle(Lifecycle.State.CREATED) {
+                charactersAdapter.loadStateFlow.collectLatest {
+                    if (charactersAdapter.itemCount > 0) {
+                        binding.rvStarWarCharacter.visibility = View.VISIBLE
+                    }
                 }
             }
+        }
 
-            repeatOnLifecycle(Lifecycle.State.RESUMED){
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.CREATED) {
                 charactersAdapter.addLoadStateListener { loadState ->
 
                     if (loadState.refresh is LoadState.Loading ||
                         loadState.append is LoadState.Loading
-                    )
-                    // Show ProgressBar
+                    ) {
+                        // Show ProgressBar
                         binding.charactersProgressBar.visibility = View.VISIBLE
-                    else {
+                    } else {
                         // Hide ProgressBar
                         binding.charactersProgressBar.visibility = View.GONE
 
@@ -110,7 +128,8 @@ class CharacterFragment : Fragment() {
                             else -> null
                         }
                         errorState?.let {
-                            Toast.makeText(requireContext(), it.error.toString(), Toast.LENGTH_LONG).show()
+                            Toast.makeText(requireContext(), it.error.toString(), Toast.LENGTH_LONG)
+                                .show()
                         }
                     }
                 }

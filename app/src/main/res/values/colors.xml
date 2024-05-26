@@ -2,12 +2,14 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="white_80">#CCFFFFFF</color>
 
     <color name="dark_gunmetal">#181c27</color>
     <color name="royal_blue">#3369ff</color>
     <color name="gray">#babecc</color>
 
     <color name="yellow">#ffc500</color>
+    <color name="yellow_80">#CCFFC500</color>
     <color name="main">#090a0f</color>
     <color name="main_dark">#37383b</color>
     <color name="light_gray">#868686</color>

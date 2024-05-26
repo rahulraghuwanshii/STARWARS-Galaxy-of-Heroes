@@ -8,9 +8,10 @@
     tools:context=".presentation.splash.SplashFragment">
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/imgStarWars"
         android:layout_width="0dp"
         android:layout_height="100dp"
+        android:transitionName="imgStarWarsTransitionStart"
         android:src="@drawable/ic_star_wars"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

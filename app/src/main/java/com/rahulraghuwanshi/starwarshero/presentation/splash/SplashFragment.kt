@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.rahulraghuwanshi.starwarshero.databinding.FragmentSplashBinding
 import kotlinx.coroutines.delay
@@ -24,8 +25,10 @@ class SplashFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             delay(3000)
+            val extras = FragmentNavigatorExtras(
+                binding.imgStarWars to "imgStarWarsTransitionEnd")
             val action = SplashFragmentDirections.actionSplashFragmentToCharacterListFragment()
-            findNavController().navigate(action)
+            findNavController().navigate(action,extras)
         }
 
         return binding.root

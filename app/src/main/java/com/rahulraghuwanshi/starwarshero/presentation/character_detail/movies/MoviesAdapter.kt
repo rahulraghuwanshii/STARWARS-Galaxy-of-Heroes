@@ -14,8 +14,8 @@ class MoviesAdapter :
     inner class MoviesViewHolder(private val binding: ItemMoviesBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(moviesResponse: MoviesResponse?) {
-            binding.tvMovieName.text = moviesResponse?.title
-            binding.tvDescription.text = moviesResponse?.openingCrawl
+            binding.txtMovieName.text = moviesResponse?.title
+            binding.txtDescription.text = moviesResponse?.openingCrawl
         }
     }
 
