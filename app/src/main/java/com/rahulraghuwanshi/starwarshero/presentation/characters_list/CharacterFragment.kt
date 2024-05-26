@@ -10,6 +10,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
@@ -70,12 +71,15 @@ class CharacterFragment : Fragment() {
     }
 
     private fun setUp() {
-        charactersAdapter = CharactersAdapter {
-            val action =
-                CharacterFragmentDirections.actionCharacterListFragmentToCharacterDetailFragment(
-                    characterDetails = it
-                )
-            findNavController().navigate(action)
+        charactersAdapter = CharactersAdapter { charater,nameView,genderView,heightView ->
+            val action = CharacterFragmentDirections.actionCharacterListFragmentToCharacterDetailFragment(characterDetails = charater)
+
+            val extras = FragmentNavigatorExtras(
+                nameView to "nameViewTransition",
+                genderView to "genderViewTransition",
+                heightView to "heightViewTransition"
+            )
+            findNavController().navigate(action,extras)
         }
         val layoutManager = GridLayoutManager(requireContext(), 2)
         binding.rvStarWarCharacter.layoutManager = layoutManager

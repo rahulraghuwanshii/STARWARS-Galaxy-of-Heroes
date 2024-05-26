@@ -2,6 +2,7 @@ package com.rahulraghuwanshi.starwarshero.presentation.characters_list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -9,7 +10,7 @@ import com.rahulraghuwanshi.starwarshero.databinding.ItemCharacterDetailBinding
 import com.rahulraghuwanshi.starwarshero.domain.model.Character
 
 class CharactersAdapter(
-    private val onClick: (Character) -> Unit
+    private val onClick: (Character, TextView, TextView, TextView) -> Unit
 ) :
     PagingDataAdapter<Character, CharacterPosterViewHolder>(CharacterDiffCallBack()) {
 
@@ -45,10 +46,17 @@ class CharacterPosterViewHolder(
 
     fun bind(
         character: Character?,
-        onClick: (Character) -> Unit
+        onClick: (Character, TextView, TextView, TextView) -> Unit
     ) {
         character?.let {
-            binding.root.setOnClickListener { onClick.invoke(character) }
+            binding.root.setOnClickListener {
+                onClick.invoke(
+                    character,
+                    binding.txtName,
+                    binding.txtGender,
+                    binding.txtHeight
+                )
+            }
             binding.txtName.text = "${character.name} :"
             binding.txtGender.text = character.gender.uppercase()
             binding.txtHeight.text = character.height

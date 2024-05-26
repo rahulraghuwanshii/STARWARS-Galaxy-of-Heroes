@@ -13,6 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.transition.TransitionInflater
 import com.rahulraghuwanshi.starwarshero.databinding.FragmentCharacterDetailBinding
 import com.rahulraghuwanshi.starwarshero.di.core.Injector
 import com.rahulraghuwanshi.starwarshero.presentation.character_detail.movies.MoviesAdapter
@@ -51,6 +52,8 @@ class CharacterDetailFragment : Fragment() {
         )[CharacterDetailViewModel::class.java]
 
         getData()
+
+        sharedElementEnterTransition = TransitionInflater.from(requireContext()).inflateTransition(android.R.transition.move)
 
         return view
     }
